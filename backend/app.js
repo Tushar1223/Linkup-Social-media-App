@@ -7,7 +7,13 @@ const path = require("path");
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: "backend/config/config.env" });
 }
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],  // Allow dev and prod origins
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed methods
+    credentials: true, // Allow cookies and credentials
+  })
+);
 
 // Using Middlewares
 app.use(express.json({ limit: "50mb" }));
